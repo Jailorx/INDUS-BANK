@@ -21,6 +21,7 @@ import javax.sql.DataSource;
 public class SecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
         http.authorizeHttpRequests((requests) ->
             requests.requestMatchers("/v1/account","/v1/balance","/v1/loans","/v1/cards").authenticated()
                     .requestMatchers("/v1/notices","/v1/contact","/error").permitAll()
